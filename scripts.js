@@ -22,7 +22,7 @@ const contacts = [
     fullName: "rendy",
     phone: 6282224544321,
     email: "rednyyy84@gmail.com",
-  }  
+  },  
   {
      id: 5,
     fullName: "firgi",
