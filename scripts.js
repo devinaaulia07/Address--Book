@@ -1,23 +1,34 @@
-let contacts = JSON.parse(localStorage.getItem('contacts')) || [
-    { name: 'John Doe', email: 'john@example.com', phone: '123-456-7890' }
+const contacts = [
+  {
+    id: 1,
+    fullName: "Devina Aulia",
+    phone: 6282320747396,
+    email: "devinaa07@gmail.com",
+  },
+  {
+    id: 2,
+    fullName: "nadila",
+    phone: 6289700654321,
+    email: "nadila99@gmail.com",
+  },
+  {
+     id: 3,
+    fullName: "kaylla",
+    phone: 6289733678955,
+    email: "kayllaaa@gmail.com",
+  },
+  { 
+    id: 4,
+    fullName: "rendy",
+    phone: 6282224544321,
+    email: "rednyyy84@gmail.com",
+  }  
+  {
+     id: 5,
+    fullName: "firgi",
+    phone: 6289888322321,
+    email: "firgii02@gmail.com",
+  }
 ];
 
-function showContacts() {
-    const div = document.getElementById('contacts');
-    div.innerHTML = contacts.map(c => <p>${c.name} - ${c.email} - ${c.phone}</p>).join('');
-}
-
-document.getElementById('form').addEventListener('submit', e => {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    if (name && email && phone) {
-        contacts.push({ name, email, phone });
-        localStorage.setItem('contacts', JSON.stringify(contacts));
-        showContacts();
-        document.getElementById('form').reset();
-    }
-});
-
-showContacts();
+console.log(contacts);
