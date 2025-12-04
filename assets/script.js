@@ -37,3 +37,4 @@ const contacts = [
 ];
 
 console.log(contacts);
+
