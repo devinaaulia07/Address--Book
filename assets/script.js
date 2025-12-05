@@ -36,5 +36,26 @@ const contacts = [
   },
 ];
 
-console.log(contacts);
+function displayContacts() {
+  // --Versi 1 : For Loop
+  // for (let index - 0; index < contacts.lenght; index++) {
+  //    const contact - contacts[index];
+  //    console.log(`
+  //      🙎‍♀️ : ${contact.fullName}
+  //      📞 : ${contact.phone}
+  //      📍  : ${contact.location}
+  //      📧 : ${contact.email}
+  //       `);
+  // }
+
+  // --Versi 2 : for..of
+  for (const contact of Contacts) {
+    console.log(`
+      🙎‍♀️ : ${contact.fullName}
+      📞 : ${contact.phone}
+      📍  : ${contact.location}
+      📧 : ${contact.email}
+      `);
+  }
+}
 
