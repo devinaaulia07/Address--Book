@@ -26,30 +26,11 @@ const contacts = [
     phone: 6282224544321,
     email: "rednyyy84@gmail.com",
     location: "Garut",
-  },  
-  {
-    id: 5,
-    fullName: "firgi",
-    phone: 6289888322321,
-    email: "firgii02@gmail.com",
-    location: "Garut",
   },
 ];
 
 function displayContacts() {
-  // --Versi 1 : For Loop
-  // for (let index - 0; index < contacts.lenght; index++) {
-  //    const contact - contacts[index];
-  //    console.log(`
-  //      🙎‍♀️ : ${contact.fullName}
-  //      📞 : ${contact.phone}
-  //      📍  : ${contact.location}
-  //      📧 : ${contact.email}
-  //       `);
-  // }
-
-  // --Versi 2 : for..of
-  for (const contact of Contacts) {
+  for (const contact of contacts) {
     console.log(`
       🙎‍♀️ : ${contact.fullName}
       📞 : ${contact.phone}
@@ -59,3 +40,19 @@ function displayContacts() {
   }
 }
 
+function addContact() {
+  contacts.push({
+  id: 5,
+    fullName: "firgi",
+    phone: 6289888322321,
+    email: "firgii02@gmail.com",
+    location: "Garut",
+  });
+}
+
+function searchContacts() {
+}
+
+
+addContact();
+displayContacts();
