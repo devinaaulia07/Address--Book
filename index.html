@@ -3,49 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Address Book</title>
+    <title>Address Book Dinamis</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
+        body { font-family: Arial, sans-serif; margin: 10px; }
         table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        form { margin-bottom: 20px; }
+        th, td { border: 1px solid #fffdfd; padding: 10px; text-align: left; }
+        th { background-color: #46e363; }
+        form { margin-bottom: 30px; }
         input { margin: 5px; padding: 5px; }
+        button { padding: 5px 10px; }
     </style>
+    <script src="script.js"></script>
 </head>
 <body>
-    <h1>Buku Alamat</h1>
+    <h1>Address Book</h1>
     
     <!-- Form untuk menambah kontak -->
     <h2>Tambah Kontak Baru</h2>
-    <form action="#" method="post">
-        <label for="nama">Nama:</label>
+    <form id="contactForm">
+        <label for="nama">Nama  :</label>
         <input type="text" id="nama" name="nama" required><br>
-        <label for="telepon">Telepon:</label>
+        <label for="telepon">Telepon :</label>
         <input type="tel" id="telepon" name="telepon" required><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br>
-        <label for="lokasi">Lokasi:</label>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="lokasi">Lokasi :</label>
         <input type="lokasi" id="lokasi" name="lokasi"><br>
-        <button type="submit">tambah</button> 
+        <button type="submit">Tambah</button>
     </form>
     
     <!-- Tabel daftar kontak -->
     <h2>Daftar Kontak</h2>
-    <table>
+    <table id="contactTable">
         <thead>
             <tr>
                 <th>Nama</th>
                 <th>Telepon</th>
                 <th>Email</th>
                 <th>lokasi</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            
-            <!-- Tambahkan baris baru di sini untuk kontak lainnya -->
+            <!-- Kontak awal -->
+            <tr>
+                <td>Devina Aulia</td>
+                <td>082320747396</td>
+                <td>devinaa0702@gmail.com</td>
+                <td>Garut</td>
+                <td><button onclick="hapusKontak(this)">Hapus</button></td> 
+            </tr>
+            <tr>
+                <td>Rere Pradita</td>
+                <td>08987654321</td>
+                <td>rerepraa@gmail.com</td>
+                <td>Garut</td>
+                <td><button onclick="hapusKontak(this)">Hapus</button></td>
+            </tr>
         </tbody>
     </table>
+
+    <script>
+        // Fungsi untuk menambah kontak
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            
+            const nama = document.getElementById('nama').value;
+            const telepon = document.getElementById('telepon').value;
+            const email = document.getElementById('email').value;
+            const lokasi = document.getElementById('lokasi').value;
+            
+            // Tambahkan baris baru ke tabel
+            const table = document.getElementById('contactTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>${nama}</td>
+                <td>${telepon}</td>
+                <td>${email}</td>
+                <td>${lokasi}</td>
+                <td><button onclick="hapusKontak(this)">Hapus</button></td>
+            `;
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+        });
+        
+        // Fungsi untuk menghapus kontak
+        function hapusKontak(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
 </body>
 </html>
- 

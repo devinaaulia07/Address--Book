@@ -1,58 +1,36 @@
-const contacts = [
-  {
-    id: 1,
-    fullName: "Devina Aulia",
-    phone: 6282320747396,
-    email: "devinaa07@gmail.com",
-    location: "Garut",
-  },
-  {
-    id: 2,
-    fullName: "nadila",
-    phone: 6289700654321,
-    email: "nadila99@gmail.com",
-    location: "Garut",
-  },
-  {
-     id: 3,
-    fullName: "kaylla",
-    phone: 6289733678955,
-    email: "kayllaaa@gmail.com",
-    location: "Garut",
-  },
-  { 
-    id: 4,
-    fullName: "rendy",
-    phone: 6282224544321,
-    email: "rednyyy84@gmail.com",
-    location: "Garut",
-  },
-];
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const lokasi = document.getElementById('lokasi').value;
+    
+    if (name && phone && email && lokasi) {
+        addContact(name, phone, email, lokasi);
+        document.getElementById('contactForm').reset();
+    }
+});
 
-function displayContacts() {
-  for (const contact of contacts) {
-    console.log(`
-      🙎‍♀️ : ${contact.fullName}
-      📞 : ${contact.phone}
-      📍  : ${contact.location}
-      📧 : ${contact.email}
-      `);
-  }
+function addContact(name, phone, email, lokasi) {
+    const contactList = document.getElementById('contactList');
+    const li = document.createElement('li');
+    li.className = 'flex justify-between items-center p-2 bg-gray-50 rounded';
+    
+    li.innerHTML = `
+        <div>
+            <strong>${name}</strong><br>
+            ${phone}<br>
+            ${email}<br>
+            ${lokasi}<br>
+           
+        </div>
+        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onclick="deleteContact(this)">Delete</button>
+    `;
+    
+    contactList.appendChild(li);
 }
 
-function addContact() {
-  contacts.push({
-  id: 5,
-    fullName: "firgi",
-    phone: 6289888322321,
-    email: "firgii02@gmail.com",
-    location: "Garut",
-  });
+function deleteContact(button) {
+    button.parentElement.remove();
 }
-
-function searchContacts() {
-}
-
-
-addContact();
-displayContacts();
