@@ -2,8 +2,8 @@
 Aplikasi sederhana untuk menampilkan dan menambah kontak.
 
 # Link
-- URL Deployment:
-- Repository :
+- URL Deployment:https://address-book-eebi.vercel.app/
+- Repository :https://github.com/devinaaulia07/Address--Book.git
   
 ## Fitur
 - Tampilkan daftar kontak.
