@@ -1,36 +1,44 @@
+// Menunggu form disubmit
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Mencegah halaman refresh
     
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
+    // Ambil data dari input (ID harus sesuai dengan HTML)
+    const nama = document.getElementById('nama').value;
+    const telepon = document.getElementById('telepon').value;
     const email = document.getElementById('email').value;
     const lokasi = document.getElementById('lokasi').value;
     
-    if (name && phone && email && lokasi) {
-        addContact(name, phone, email, lokasi);
-        document.getElementById('contactForm').reset();
+    // Jalankan fungsi tambah kontak jika semua data terisi
+    if (nama && telepon && email && lokasi) {
+        addContact(nama, telepon, email, lokasi);
+        document.getElementById('contactForm').reset(); // Reset form setelah tambah
     }
 });
 
-function addContact(name, phone, email, lokasi) {
-    const contactList = document.getElementById('contactList');
-    const li = document.createElement('li');
-    li.className = 'flex justify-between items-center p-2 bg-gray-50 rounded';
+function addContact(nama, telepon, email, lokasi) {
+    // Ambil bagian badan tabel (tbody)
+    const tableBody = document.querySelector('#contactTable tbody');
     
-    li.innerHTML = `
-        <div>
-            <strong>${name}</strong><br>
-            ${phone}<br>
-            ${email}<br>
-            ${lokasi}<br>
-           
-        </div>
-        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onclick="deleteContact(this)">Delete</button>
+    // Buat baris baru (tr)
+    const row = document.createElement('tr');
+    
+    // Isi baris dengan kolom (td)
+    row.innerHTML = `
+        <td>${nama}</td>
+        <td>${telepon}</td>
+        <td>${email}</td>
+        <td>${lokasi}</td>
+        <td>
+            <button onclick="deleteContact(this)">Hapus</button>
+        </td>
     `;
     
-    contactList.appendChild(li);
+    // Masukkan baris ke dalam tabel
+    tableBody.appendChild(row);
 }
 
 function deleteContact(button) {
-    button.parentElement.remove();
+    // Menghapus baris (tr) tempat tombol tersebut berada
+    const row = button.parentElement.parentElement;
+    row.remove();
 }

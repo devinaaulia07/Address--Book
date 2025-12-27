@@ -3,95 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Address Book Dinamis</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 10px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #fffdfd; padding: 10px; text-align: left; }
-        th { background-color: #46e363; }
-        form { margin-bottom: 30px; }
-        input { margin: 5px; padding: 5px; }
-        button { padding: 5px 10px; }
-    </style>
-    <script src="script.js"></script>
-</head>
-<body>
-    <h1>Address Book</h1>
-    
-    <!-- Form untuk menambah kontak -->
-    <h2>Tambah Kontak Baru</h2>
-    <form id="contactForm">
-        <label for="nama">Nama  :</label>
-        <input type="text" id="nama" name="nama" required><br>
-        <label for="telepon">Telepon :</label>
-        <input type="tel" id="telepon" name="telepon" required><br>
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required><br>
-        <label for="lokasi">Lokasi :</label>
-        <input type="lokasi" id="lokasi" name="lokasi"><br>
-        <button type="submit">Tambah</button>
-    </form>
-    
-    <!-- Tabel daftar kontak -->
-    <h2>Daftar Kontak</h2>
-    <table id="contactTable">
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Telepon</th>
-                <th>Email</th>
-                <th>lokasi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Kontak awal -->
-            <tr>
-                <td>Devina Aulia</td>
-                <td>082320747396</td>
-                <td>devinaa0702@gmail.com</td>
-                <td>Garut</td>
-                <td><button onclick="hapusKontak(this)">Hapus</button></td> 
-            </tr>
-            <tr>
-                <td>Rere Pradita</td>
-                <td>08987654321</td>
-                <td>rerepraa@gmail.com</td>
-                <td>Garut</td>
-                <td><button onclick="hapusKontak(this)">Hapus</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <title>Address Book - Devina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head> 
+<body class="bg-gray-100 p-5 md:p-10">
+
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">📇 Address Book</h1>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md mb-10">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">Tambah Kontak Baru</h2>
+            <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-600">Nama</label>
+                    <input type="text" id="nama" required class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-600">Telepon</label>
+                    <input type="tel" id="telepon" required class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-600">Email</label>
+                    <input type="email" id="email" required class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-600">Lokasi</label>
+                    <input type="text" id="lokasi" required class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600 transition">
+                        Tambah Kontak
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <h2 class="text-xl font-semibold p-6 border-b text-gray-700">Daftar Kontak</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="contactTable">
+                    <thead>
+                        <tr class="bg-blue-500 text-white">
+                            <th class="p-4">Nama</th>
+                            <th class="p-4">Telepon</th>
+                            <th class="p-4">Email</th>
+                            <th class="p-4">Lokasi</th>
+                            <th class="p-4 text-center">Aksi</th>
+                        </tr>
+                    </thead> 
+                    <tbody id="contactList">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Fungsi untuk menambah kontak
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah reload halaman
+        // Mengambil elemen dari DOM
+        const contactForm = document.getElementById('contactForm');
+        const contactList = document.getElementById('contactList');
+
+        // Tampilkan data dari LocalStorage saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', getContacts);
+
+        // Fungsi saat form disubmit
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            const nama = document.getElementById('nama').value;
-            const telepon = document.getElementById('telepon').value;
+            const name = document.getElementById('nama').value;
+            const phone = document.getElementById('telepon').value;
             const email = document.getElementById('email').value;
             const lokasi = document.getElementById('lokasi').value;
             
-            // Tambahkan baris baru ke tabel
-            const table = document.getElementById('contactTable').getElementsByTagName('tbody')[0];
-            const newRow = table.insertRow();
-            newRow.innerHTML = `
-                <td>${nama}</td>
-                <td>${telepon}</td>
-                <td>${email}</td>
-                <td>${lokasi}</td>
-                <td><button onclick="hapusKontak(this)">Hapus</button></td>
-            `;
+            const contactObj = { name, phone, email, lokasi };
+
+            addContactToTable(contactObj);
+            saveContactLocally(contactObj);
             
-            // Reset form
-            document.getElementById('contactForm').reset();
+            contactForm.reset(); // Kosongkan form setelah input
         });
-        
-        // Fungsi untuk menghapus kontak
-        function hapusKontak(button) {
-            const row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
+
+        // Fungsi menampilkan baris ke tabel
+        function addContactToTable(contact) {
+            const row = document.createElement('tr');
+            row.className = "border-b hover:bg-gray-50 transition";
+            
+            row.innerHTML = `
+                <td class="p-4 font-medium text-gray-700">${contact.name}</td>
+                <td class="p-4 text-gray-600">${contact.phone}</td>
+                <td class="p-4 text-gray-600">${contact.email}</td>
+                <td class="p-4 text-gray-600">${contact.lokasi}</td>
+                <td class="p-4 text-center">
+                    <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition" 
+                            onclick="deleteContact(this, '${contact.phone}')">
+                        Hapus
+                    </button>
+                </td>
+            `;
+            contactList.appendChild(row);
+        }
+
+        // Fungsi Simpan ke Browser (LocalStorage)
+        function saveContactLocally(contact) {
+            let contacts = localStorage.getItem('contacts') ? JSON.parse(localStorage.getItem('contacts')) : [];
+            contacts.push(contact);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+        }
+
+        // Fungsi Ambil data dari Browser
+        function getContacts() {
+            let contacts = localStorage.getItem('contacts') ? JSON.parse(localStorage.getItem('contacts')) : [];
+            contacts.forEach(contact => addContactToTable(contact));
+        }
+
+        // Fungsi Hapus Kontak
+        function deleteContact(button, phone) {
+            // Hapus dari Tampilan
+            button.parentElement.parentElement.remove();
+            
+            // Hapus dari LocalStorage
+            let contacts = JSON.parse(localStorage.getItem('contacts'));
+            const filteredContacts = contacts.filter(c => c.phone !== phone);
+            localStorage.setItem('contacts', JSON.stringify(filteredContacts));
         }
     </script>
 </body>
