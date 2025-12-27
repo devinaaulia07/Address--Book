@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Adress Book</title>
-        <script src="https://cdn.jsdelive.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body>
-    <h1 class="text-3xl mb-4">Address Book</h1>
-
-    <div id="contact-list" class="space-y-4"></div>
-
-    <script src="./assets/script.js"></script>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Book</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form { margin-bottom: 20px; }
+        input { margin: 5px; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Buku Alamat</h1>
+    
+    <!-- Form untuk menambah kontak -->
+    <h2>Tambah Kontak Baru</h2>
+    <form action="#" method="post">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" required><br>
+        <label for="telepon">Telepon:</label>
+        <input type="tel" id="telepon" name="telepon" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br>
+        <label for="lokasi">Lokasi:</label>
+        <input type="lokasi" id="lokasi" name="lokasi"><br>
+        <button type="submit">tambah</button> 
+    </form>
+    
+    <!-- Tabel daftar kontak -->
+    <h2>Daftar Kontak</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Telepon</th>
+                <th>Email</th>
+                <th>lokasi</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <!-- Tambahkan baris baru di sini untuk kontak lainnya -->
+        </tbody>
+    </table>
 </body>
-
 </html>
+ 
