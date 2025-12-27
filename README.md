@@ -17,8 +17,6 @@ Aplikasi sederhana untuk menampilkan dan menambah kontak.
 ```mermaid
 flowchart TD
     A[Buka Aplikasi] --> B{Klik Tombol Add}
-    B --> C[Isi Form Nama & Telepon]
-    C --> D[Klik Submit]
-    D --> E[Validasi Input]
-    E --> F[Simpan ke LocalStorage]
+    B --> C[Isi Form Nama & Telepon] C --> D[Klik Submit]
+    D --> E[Validasi Input] E --> F[Simpan ke LocalStorage]
     F --> G[Update Tampilan Daftar]
