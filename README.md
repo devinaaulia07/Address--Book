@@ -9,9 +9,10 @@ Aplikasi sederhana untuk menampilkan dan menambah kontak.
 # ✨ Fitur
 - Tampilkan daftar kontak.
 - Tambah kontak baru (disimpan di browser).
+- Hapus Kontak.
 
 ## 🛠️ Teknologi yang Digunakan
-- **HTML5 & CSS:** 
+- **HTML** 
 - **JavaScript:** 
 
 ## 📊 Diagram Alur: Tambah Kontak
